@@ -61,12 +61,16 @@
             </props>
         </property>
 
-<!--        &lt;!&ndash; annotated classes &ndash;&gt;-->
-<!--        <property name="annotatedClasses">-->
-<!--            <list>-->
-<!--                <value>productcrudapp.model.Product</value>-->
-<!--            </list>-->
-<!--        </property>-->
+        <!-- annotated classes -->
+        <property name="annotatedClasses">
+            <list>
+                <value>sustainifyapp.model.User</value>
+                <value>sustainifyapp.model.Activity</value>
+                <value>sustainifyapp.model.Goal</value>
+                <value>sustainifyapp.model.Tip</value>
+                <value>sustainifyapp.model.Comment</value>
+            </list>
+        </property>
 
     </bean>
 
