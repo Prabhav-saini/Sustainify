@@ -13,7 +13,7 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    private String username;
+    private String email;
     private String mobileNumber;
     @CreationTimestamp
     @Column(updatable = false)
@@ -25,11 +25,11 @@ public class User {
         super();
     }
 
-    public User(Long id, String firstName, String lastName, String username, String mobileNumber, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public User(Long id, String firstName, String lastName, String email, String mobileNumber, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.username = username;
+        this.email = email;
         this.mobileNumber = mobileNumber;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
@@ -59,12 +59,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMobileNumber() {
@@ -97,7 +97,7 @@ public class User {
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
+                ", username='" + email + '\'' +
                 ", mobileNumber='" + mobileNumber + '\'' +
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
