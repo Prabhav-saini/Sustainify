@@ -38,6 +38,19 @@
       <artifactId>hibernate-core</artifactId>
       <version>5.6.0.Final</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version> <!-- or the latest version -->
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
   <build>
     <finalName>Sustainify</finalName>

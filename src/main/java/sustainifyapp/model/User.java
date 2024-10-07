@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class User {
@@ -14,6 +15,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     private String mobileNumber;
     @CreationTimestamp
     @Column(updatable = false)
@@ -21,15 +23,22 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedDate;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Activity> activities;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Goal> goals;
+
     public User() {
         super();
     }
 
-    public User(Long id, String firstName, String lastName, String email, String mobileNumber, LocalDateTime createdDate, LocalDateTime updatedDate) {
+    public User(Long id, String firstName, String lastName, String email, String password, String mobileNumber, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.mobileNumber = mobileNumber;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
@@ -102,5 +111,13 @@ public class User {
                 ", createdDate=" + createdDate +
                 ", updatedDate=" + updatedDate +
                 '}';
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

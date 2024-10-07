@@ -69,6 +69,7 @@
                 <value>sustainifyapp.model.Goal</value>
                 <value>sustainifyapp.model.Tip</value>
                 <value>sustainifyapp.model.Comment</value>
+                <value>sustainifyapp.service.UserService</value>
             </list>
         </property>
 
