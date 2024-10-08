@@ -28,7 +28,7 @@
                             </a>
                         </div>
                         <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Enter your details to register</h2>
-                        <form action="api/add-user" method="post">
+                        <form action="add-user" method="post">
                             <div class="row gy-2 overflow-hidden">
                                 <div class="col-12">
                                     <div class="form-floating mb-3">
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <p class="m-0 text-secondary text-center">Already have an account? <a href="#!" class="link-primary text-decoration-none">Sign in</a></p>
+                                    <p class="m-0 text-secondary text-center">Already have an account? <a href="http://localhost:8080/sustainify/api/sign-in" class="link-primary text-decoration-none">Sign in</a></p>
                                 </div>
                             </div>
                         </form>
