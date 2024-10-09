@@ -27,11 +27,11 @@ public class GoalDao {
 
     public List<Goal> getAllGoalsByUserId(Long userId) {
         Session session = Objects.requireNonNull(hibernateTemplate.getSessionFactory()).getCurrentSession();
-        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder(); // Criteria Builder
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
 
-        CriteriaQuery<Goal> criteriaQuery = criteriaBuilder.createQuery(Goal.class); // Criteria query
+        CriteriaQuery<Goal> criteriaQuery = criteriaBuilder.createQuery(Goal.class);
         Root<Goal> root = criteriaQuery.from(Goal.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("user").get("id"), userId)); // Build query with where clause
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("user").get("id"), userId));
 
         return session.createQuery(criteriaQuery).getResultList();
     }
