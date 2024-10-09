@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,15 +48,24 @@
             left: 1cm;
             display: inline-block;
         }
+         .username-display {
+                color: #00796b;
+                font-weight: bold;
+                background-color: #f4f4f9;
+                padding: 5px 16px;
+                display: block;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
 
         .profile button {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+           background-color: #4caf50;
+                   color: #fff;
+                   padding: 10px;
+                   font-size: 16px;
+                   border: none;
+                   cursor: pointer;
+                   border-radius: 5px;
         }
 
         .profile button:hover {
@@ -62,13 +73,15 @@
         }
 
         .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #fff;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
+           display: none;
+                   position: absolute;
+                   right: 0;
+                   background-color: #fff;
+                   min-width: 200px; /* Increased width */
+                   max-width: 250px; /* Optional max width */
+                   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                   z-index: 1;
+                   overflow-wrap: break-word;
         }
 
         .dropdown-content a {
@@ -167,8 +180,10 @@
     <div class="profile">
         <button>Profile</button>
         <div class="dropdown-content">
-            <a href="updateProfile.jsp">Update Profile</a>
-            <a href="logout.jsp">Log Out</a>
+            <!-- Username with new style -->
+            <a class="username-display" href="http://localhost:8080/sustainify/api/view-profile">${username}</a>
+            <a href="http://localhost:8080/sustainify/api/update-profile">Update Profile</a>
+            <a href="http://localhost:8080/sustainify/api/logout">Log Out</a>
         </div>
     </div>
     <div class="app-name">
@@ -185,10 +200,11 @@
             <input type="text" placeholder="Activity Description" />
             <input type="number" placeholder="Amount (e.g., 5)" />
             <input type="text" placeholder="Unit (e.g., kg, liters)" />
+            <p>Activity Date</p>
             <input type="date" placeholder="Activity Date" />
             <button class="log-button">Log Activity</button>
         </div>
-        <button class="view-button" onclick="location.href='viewActivities.jsp'">View Activities</button>
+        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/activities'">View Activities</button>
     </div>
 
     <div class="box">
@@ -198,11 +214,13 @@
             <input type="text" placeholder="Goal Description" />
             <input type="number" placeholder="Target Amount (e.g., 20)" />
             <input type="text" placeholder="Target Unit (e.g., kg, hours)" />
+            <p>Start Date</p>
             <input type="date" placeholder="Start Date" />
+            <p>End Date</p>
             <input type="date" placeholder="End Date" />
             <button class="log-button">Log Goal</button>
         </div>
-        <button class="view-button" onclick="location.href='viewGoals.jsp'">View Goals</button>
+        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/goals'">View Goals</button>
     </div>
 </div>
 

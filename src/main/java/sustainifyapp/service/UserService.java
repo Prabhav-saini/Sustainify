@@ -24,7 +24,12 @@ public class UserService {
 
     @Transactional
     public void updateUser(User user) {
-        userDao.updateUser(user);
+        User existingUser = userDao.getUserByEmail(user.getEmail());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setMobileNumber(user.getMobileNumber());
+        existingUser.setPassword(user.getPassword());
+        userDao.updateUser(existingUser);
     }
 
     @Transactional
@@ -33,9 +38,19 @@ public class UserService {
     }
 
     @Transactional
-    public Boolean isUserExist(User user) {
+    public Boolean isUserValid(User user) {
        User existingUser = userDao.getUserByEmailPassword(user);
         return Objects.nonNull(existingUser);
+    }
+
+    @Transactional
+    public User viewUser(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
+    @Transactional
+    public Long getUserIdByEmail(String email) {
+        return userDao.getUserId(email);
     }
 
 }
