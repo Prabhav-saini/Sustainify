@@ -4,7 +4,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <html>
 <head>
-    <title>Your Tips</title>
+    <title>Tips For You</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +20,18 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        .back-btn {
+                    display: inline-block;
+                    margin: 20px 0;
+                    padding: 10px 15px;
+                    background-color: #007bff;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                }
+                .back-btn:hover {
+                    background-color: #0056b3;
+                }
         h1 {
             text-align: center;
             color: #333;
@@ -105,6 +117,7 @@
                 </c:if>
             </tbody>
         </table>
+         <a href="${pageContext.request.contextPath}/api/home" class="btn back-btn">Back to Home</a>
     </div>
 </body>
 </html>
