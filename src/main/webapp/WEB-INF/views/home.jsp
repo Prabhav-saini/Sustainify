@@ -231,7 +231,7 @@
         <input type="text" placeholder="Tip Description" />
         <button class="log-button">Submit Tip</button>
     </div>
-    <button class="view-button" onclick="location.href='viewTips.jsp'">View Tips</button>
+    <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/tips'">View Tips</button>
 </div>
 </body>
 </html>

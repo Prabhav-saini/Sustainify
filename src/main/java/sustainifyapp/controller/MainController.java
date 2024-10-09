@@ -2,21 +2,17 @@ package sustainifyapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import sustainifyapp.model.Activity;
 import sustainifyapp.model.Goal;
 import sustainifyapp.model.Tip;
 import sustainifyapp.model.User;
-import sustainifyapp.service.ActivityService;
-import sustainifyapp.service.GoalService;
-import sustainifyapp.service.TipService;
-import sustainifyapp.service.UserService;
+import sustainifyapp.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -33,6 +29,8 @@ public class MainController {
     private TipService tipService;
     @Autowired
     private GoalService goalService;
+    @Autowired
+    private CommentService commentService;
 
     @RequestMapping("/home")
     public String home(Model m, HttpSession session) {
@@ -127,5 +125,31 @@ public class MainController {
         List<Goal> goals = goalService.viewAllGoalByUserId(userId);
         m.addAttribute("goals", goals);
         return "viewGoals";
+    }
+
+    @RequestMapping(value = "view/tips", method = RequestMethod.GET)
+    public String viewAllTips(Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        List<Tip> tips = tipService.viewAllTips();
+        m.addAttribute("tips", tips);
+        return "viewTips";
+    }
+
+    @RequestMapping(value = "mark/goal/achieved", method = RequestMethod.POST)
+    public String markGoalAchieved(@RequestParam("goalId") Long goalId, Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        Long userId = userService.getUserIdByEmail(username);
+        goalService.markGoalAchieved(goalId);
+        List<Goal> goals = goalService.viewAllGoalByUserId(userId);
+        m.addAttribute("goals", goals);
+        return "viewGoals";
+    }
+
+    @PostMapping("/submit/comment")
+    public ResponseEntity<String> submitComment(@RequestParam Long tipId, @RequestParam String content, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        Long userId = userService.getUserIdByEmail(username);
+        commentService.addCommentToTip(tipId, userId, content);
+        return ResponseEntity.ok("Comment submitted successfully.");
     }
 }

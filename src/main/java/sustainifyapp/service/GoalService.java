@@ -23,4 +23,16 @@ public class GoalService {
     public List<Goal> viewAllGoalByUserId(Long userId) {
         return goalDao.getAllGoalsByUserId(userId);
     }
+
+    @Transactional
+    public Goal viewGoal(Long goalId) {
+        return goalDao.viewGoalById(goalId);
+    }
+
+    @Transactional
+    public void markGoalAchieved(Long goalId) {
+        Goal goal = viewGoal(goalId);
+        goal.setAchieved(true);
+         goalDao.markGoalAchievedById(goal);
+    }
 }

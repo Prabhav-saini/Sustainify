@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sustainifyapp.model.Activity;
 import sustainifyapp.model.Goal;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -34,5 +35,14 @@ public class GoalDao {
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("user").get("id"), userId));
 
         return session.createQuery(criteriaQuery).getResultList();
+    }
+
+    @Transactional
+    public void markGoalAchievedById(Goal goal) {
+        this.hibernateTemplate.update(goal);
+    }
+
+    public Goal viewGoalById(Long goalId) {
+        return this.hibernateTemplate.get(Goal.class, goalId);
     }
 }
