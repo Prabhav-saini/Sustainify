@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Your Activities</title>
+    <title>Your Goals</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -54,28 +54,30 @@
 </head>
 <body>
     <div class="container">
-        <h1>Your Activities</h1>
+        <h1>Your Goals</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Activity Type</th>
-                    <th>Date Logged</th>
-                    <th>Amount</th>
-                    <th>Amount Unit</th>
+                    <th>Description</th>
+                    <th>Created Date</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Achieved</th>
                 </tr>
             </thead>
             <tbody>
-                <c:forEach var="activity" items="${activities}">
+                <c:forEach var="goal" items="${goals}">
                     <tr>
-                        <td>${activity.type}</td>
-                        <td>${activity.dateLogged}</td>
-                        <td>${activity.amount}</td>
-                        <td>${activity.amountUnit}</td>
+                        <td>${goal.description}</td>
+                        <td>${goal.createdDate}</td>
+                        <td>${goal.startDate}</td>
+                        <td>${goal.endDate}</td>
+                        <td>${goal.achieved ? 'Yes' : 'No'}</td>
                     </tr>
                 </c:forEach>
-                <c:if test="${empty activities}">
+                <c:if test="${empty goals}">
                     <tr>
-                        <td colspan="4" style="text-align:center;">No activities found.</td>
+                        <td colspan="5" style="text-align:center;">No goals found.</td>
                     </tr>
                 </c:if>
             </tbody>

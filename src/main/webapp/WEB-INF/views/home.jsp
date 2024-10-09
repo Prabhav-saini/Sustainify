@@ -220,7 +220,7 @@
             <input type="date" placeholder="End Date" />
             <button class="log-button">Log Goal</button>
         </div>
-        <button class="view-button" onclick="location.href='viewGoals.jsp'">View Goals</button>
+        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/goals'">View Goals</button>
     </div>
 </div>
 

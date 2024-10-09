@@ -119,4 +119,13 @@ public class MainController {
         m.addAttribute("activities", activities);
         return "viewActivities";
     }
+
+    @RequestMapping(value = "view/goals", method = RequestMethod.GET)
+    public String viewAllGoals(Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        Long userId = userService.getUserIdByEmail(username);
+        List<Goal> goals = goalService.viewAllGoalByUserId(userId);
+        m.addAttribute("goals", goals);
+        return "viewGoals";
+    }
 }
