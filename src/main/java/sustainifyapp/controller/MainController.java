@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import sustainifyapp.model.Activity;
 import sustainifyapp.model.Goal;
@@ -124,6 +125,16 @@ public class MainController {
     public String viewAllGoals(Model m, HttpSession session) {
         String username = (String) session.getAttribute("userEmail");
         Long userId = userService.getUserIdByEmail(username);
+        List<Goal> goals = goalService.viewAllGoalByUserId(userId);
+        m.addAttribute("goals", goals);
+        return "viewGoals";
+    }
+
+    @RequestMapping(value = "mark/goal/achieved", method = RequestMethod.POST)
+    public String markGoalAchieved(@RequestParam("goalId") Long goalId, Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        Long userId = userService.getUserIdByEmail(username);
+        goalService.markGoalAchieved(goalId);
         List<Goal> goals = goalService.viewAllGoalByUserId(userId);
         m.addAttribute("goals", goals);
         return "viewGoals";
