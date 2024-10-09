@@ -15,6 +15,11 @@ public class TipService {
     TipDao tipDao;
 
     @Transactional
+    public void createTip(Tip tip) {
+        tipDao.createTip(tip);
+    }
+
+    @Transactional
     public List<Tip> viewAllTips() {
         return tipDao.viewAllTips();
     }

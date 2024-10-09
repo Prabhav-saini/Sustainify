@@ -16,6 +16,8 @@ import sustainifyapp.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -86,7 +88,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/check-user", method = RequestMethod.POST)
-    public  RedirectView checkUser(@ModelAttribute User user, HttpServletRequest request) {
+    public RedirectView checkUser(@ModelAttribute User user, HttpServletRequest request) {
         RedirectView redirectView = new RedirectView();
         if(userService.isUserValid(user)) {
             HttpSession session = request.getSession();
@@ -151,5 +153,42 @@ public class MainController {
         Long userId = userService.getUserIdByEmail(username);
         commentService.addCommentToTip(tipId, userId, content);
         return ResponseEntity.ok("Comment submitted successfully.");
+    }
+
+    @RequestMapping(value = "/log-activity", method = RequestMethod.POST)
+    public RedirectView logActivity(@ModelAttribute Activity activity, HttpServletRequest request, HttpSession session) {
+        RedirectView redirectView = new RedirectView();
+        String username = (String) session.getAttribute("userEmail");
+        User user = userService.viewUser(username);
+        activity.setUser(user);
+        activity.setDateLogged(LocalDateTime.now());
+        activityService.createActivity(activity);
+        redirectView.setUrl(request.getContextPath() + "/api/home");
+        return redirectView;
+    }
+
+    @RequestMapping(value = "/log-goal", method = RequestMethod.POST)
+    public RedirectView logGoal(@ModelAttribute Goal goal, HttpServletRequest request, HttpSession session) {
+        RedirectView redirectView = new RedirectView();
+        String username = (String) session.getAttribute("userEmail");
+        User user = userService.viewUser(username);
+        goal.setUser(user);
+        goal.setStartDate(LocalDateTime.now());
+        goal.setEndDate(LocalDateTime.now().plusDays(Long.parseLong(goal.getTargetDays())));
+        goalService.createGoal(goal);
+        redirectView.setUrl(request.getContextPath() + "/api/home");
+        return redirectView;
+    }
+
+    @RequestMapping(value = "/submit-tip", method = RequestMethod.POST)
+    public RedirectView submitTip(@ModelAttribute Tip tip, HttpServletRequest request, HttpSession session) {
+        RedirectView redirectView = new RedirectView();
+        String username = (String) session.getAttribute("userEmail");
+        User user = userService.viewUser(username);
+        tip.setUsers(new ArrayList<>());
+        tip.getUsers().add(user);
+        tipService.createTip(tip);
+        redirectView.setUrl(request.getContextPath() + "/api/home");
+        return redirectView;
     }
 }

@@ -48,24 +48,25 @@
             left: 1cm;
             display: inline-block;
         }
-         .username-display {
-                color: #00796b;
-                font-weight: bold;
-                background-color: #f4f4f9;
-                padding: 5px 16px;
-                display: block;
-                text-align: center;
-                border-bottom: 1px solid #ddd;
-            }
+
+        .username-display {
+            color: #00796b;
+            font-weight: bold;
+            background-color: #f4f4f9;
+            padding: 5px 16px;
+            display: block;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
 
         .profile button {
-           background-color: #4caf50;
-                   color: #fff;
-                   padding: 10px;
-                   font-size: 16px;
-                   border: none;
-                   cursor: pointer;
-                   border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
         .profile button:hover {
@@ -73,15 +74,15 @@
         }
 
         .dropdown-content {
-           display: none;
-                   position: absolute;
-                   right: 0;
-                   background-color: #fff;
-                   min-width: 200px; /* Increased width */
-                   max-width: 250px; /* Optional max width */
-                   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                   z-index: 1;
-                   overflow-wrap: break-word;
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #fff;
+            min-width: 200px; /* Increased width */
+            max-width: 250px; /* Optional max width */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            overflow-wrap: break-word;
         }
 
         .dropdown-content a {
@@ -96,7 +97,7 @@
         }
 
         .profile:hover .dropdown-content {
-        position: absolute;
+            position: absolute;
             left: 1cm;
             display: block;
         }
@@ -195,43 +196,40 @@
 <div class="container">
     <div class="box">
         <h2>Log Activity</h2>
-        <div class="log-section">
-            <input type="text" placeholder="Enter Activity Name (e.g., Recycling)" />
-            <input type="text" placeholder="Activity Description" />
-            <input type="number" placeholder="Amount (e.g., 5)" />
-            <input type="text" placeholder="Unit (e.g., kg, liters)" />
-            <p>Activity Date</p>
-            <input type="date" placeholder="Activity Date" />
-            <button class="log-button">Log Activity</button>
-        </div>
-        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/activities'">View Activities</button>
+        <form action="log-activity" method="post">
+            <div class="log-section">
+                <input type="text" name="type" placeholder="Enter Activity Type (e.g., Recycling)" required />
+                <input type="number" name="amount" placeholder="Amount (e.g., 5)" required />
+                <input type="text" name="amountUnit" placeholder="Unit (e.g., kg, liters)" required />
+                <button type="submit" class="log-button">Log Activity</button>
+            </div>
+            <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/activities'">View Activities</button>
+        </form>
     </div>
 
     <div class="box">
         <h2>Log Goal</h2>
-        <div class="log-section">
-            <input type="text" placeholder="Goal Title (e.g., Reduce Plastic Use)" />
-            <input type="text" placeholder="Goal Description" />
-            <input type="number" placeholder="Target Amount (e.g., 20)" />
-            <input type="text" placeholder="Target Unit (e.g., kg, hours)" />
-            <p>Start Date</p>
-            <input type="date" placeholder="Start Date" />
-            <p>End Date</p>
-            <input type="date" placeholder="End Date" />
-            <button class="log-button">Log Goal</button>
-        </div>
-        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/goals'">View Goals</button>
+        <form action="log-goal" method="post">
+            <div class="log-section">
+                <input type="text" name="description" placeholder="Goal Title (e.g., Reduce Plastic Use)" required />
+                <input type="text" name="targetDays" placeholder="Target Days To Achieve Goal" required />
+                <button type="submit" class="log-button">Log Goal</button>
+            </div>
+            <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/goals'">View Goals</button>
+        </form>
     </div>
 </div>
 
 <div class="tips">
-    <h2>Submit a Tip</h2>
-    <div class="tip-form">
-        <input type="text" placeholder="Enter Tip Title" />
-        <input type="text" placeholder="Tip Description" />
-        <button class="log-button">Submit Tip</button>
+        <h2>Submit a Tip</h2>
+        <form action="submit-tip" method="post">
+            <div class="tip-form">
+                <input type="text" name="title" placeholder="Enter Tip Title" required />
+                <input type="text" name="content" placeholder="Tip Description" required />
+                <button type="submit" class="log-button">Submit Tip</button>
+            </div>
+            <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/tips'">View Tips</button>
+        </form>
     </div>
-    <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/tips'">View Tips</button>
-</div>
 </body>
 </html>

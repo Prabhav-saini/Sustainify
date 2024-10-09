@@ -21,6 +21,7 @@ public class Goal {
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private String targetDays;
     private Boolean achieved;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -30,13 +31,14 @@ public class Goal {
         super();
     }
 
-    public Goal(Long id, String description, LocalDateTime createdDate, LocalDateTime updatedDate, LocalDateTime startDate, LocalDateTime endDate, Boolean achieved, User user) {
+    public Goal(Long id, String description, LocalDateTime createdDate, LocalDateTime updatedDate, LocalDateTime startDate, LocalDateTime endDate, String targetDays, Boolean achieved, User user) {
         this.id = id;
         this.description = description;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.targetDays = targetDays;
         this.achieved = achieved;
         this.user = user;
     }
@@ -117,5 +119,13 @@ public class Goal {
                 ", achieved=" + achieved +
                 ", user=" + user +
                 '}';
+    }
+
+    public String getTargetDays() {
+        return targetDays;
+    }
+
+    public void setTargetDays(String targetDays) {
+        this.targetDays = targetDays;
     }
 }
