@@ -60,6 +60,14 @@ public class MainController {
         m.addAttribute("username", username);
         return "updateProfile";
     }
+
+    @RequestMapping("/view-profile")
+    public String viewProfile(Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        User user = userService.viewUser(username);
+        m.addAttribute("user", user);
+        return "userProfile";
+    }
     @RequestMapping(value = "/add-user", method = RequestMethod.POST)
     public RedirectView createUser(@ModelAttribute User user, HttpServletRequest request) {
         HttpSession session = request.getSession();

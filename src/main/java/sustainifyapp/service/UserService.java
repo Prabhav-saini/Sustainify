@@ -43,4 +43,9 @@ public class UserService {
         return Objects.nonNull(existingUser);
     }
 
+    @Transactional
+    public User viewUser(String email) {
+        return userDao.getUserByEmail(email);
+    }
+
 }

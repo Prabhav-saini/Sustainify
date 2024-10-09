@@ -181,7 +181,7 @@
         <button>Profile</button>
         <div class="dropdown-content">
             <!-- Username with new style -->
-            <span class="username-display">${username}</span>
+            <a class="username-display" href="http://localhost:8080/sustainify/api/view-profile">${username}</a>
             <a href="http://localhost:8080/sustainify/api/update-profile">Update Profile</a>
             <a href="http://localhost:8080/sustainify/api/logout">Log Out</a>
         </div>
