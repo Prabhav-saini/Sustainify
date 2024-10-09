@@ -54,6 +54,12 @@ public class MainController {
         return "login_user_form";
     }
 
+    @RequestMapping("/update-profile")
+    public String updateProfileForm(Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        m.addAttribute("username", username);
+        return "updateProfile";
+    }
     @RequestMapping(value = "/add-user", method = RequestMethod.POST)
     public RedirectView createUser(@ModelAttribute User user, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -64,10 +70,18 @@ public class MainController {
         return redirectView;
     }
 
+    @RequestMapping(value = "/update-user", method = RequestMethod.POST)
+    public RedirectView updateUser(@ModelAttribute User user, HttpServletRequest request) {
+        userService.updateUser(user);
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(request.getContextPath() + "/api/home");
+        return redirectView;
+    }
+
     @RequestMapping(value = "/check-user", method = RequestMethod.POST)
     public  RedirectView checkUser(@ModelAttribute User user, HttpServletRequest request) {
         RedirectView redirectView = new RedirectView();
-        if(userService.isUserExist(user)) {
+        if(userService.isUserValid(user)) {
             HttpSession session = request.getSession();
             session.setAttribute("userEmail", user.getEmail());
             redirectView.setUrl(request.getContextPath() + "/api/home");

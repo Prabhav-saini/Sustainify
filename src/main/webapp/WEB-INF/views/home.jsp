@@ -182,7 +182,7 @@
         <div class="dropdown-content">
             <!-- Username with new style -->
             <span class="username-display">${username}</span>
-            <a href="updateProfile.jsp">Update Profile</a>
+            <a href="http://localhost:8080/sustainify/api/update-profile">Update Profile</a>
             <a href="http://localhost:8080/sustainify/api/logout">Log Out</a>
         </div>
     </div>

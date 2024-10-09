@@ -23,6 +23,7 @@ public class UserDao {
         this.hibernateTemplate.save(user);
     }
 
+    @Transactional
     public void updateUser(User user) {
         this.hibernateTemplate.update(user);
     }
@@ -40,6 +41,17 @@ public class UserDao {
         Root<User> root = criteriaQuery.from(User.class);
         criteriaQuery.select(root).where(criteria.equal(root.get("email"), user.getEmail()),
                 criteria.equal(root.get("password"), user.getPassword())); // Build query with where clause
+
+        return session.createQuery(criteriaQuery).uniqueResult();
+    }
+
+    public User getUserByEmail(String email) {
+        Session session = Objects.requireNonNull(hibernateTemplate.getSessionFactory()).getCurrentSession();
+        CriteriaBuilder criteria = session.getCriteriaBuilder(); // Criteria Builder
+
+        CriteriaQuery<User> criteriaQuery = criteria.createQuery(User.class); // Criteria query
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root).where(criteria.equal(root.get("email"), email)); // Build query with where clause
 
         return session.createQuery(criteriaQuery).uniqueResult();
     }
