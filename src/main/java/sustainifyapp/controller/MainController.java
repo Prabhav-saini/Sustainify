@@ -1,6 +1,7 @@
 package sustainifyapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -108,5 +109,14 @@ public class MainController {
         }
        redirectView.setUrl(request.getContextPath() + "/api/sign-in");
         return redirectView;
+    }
+
+    @RequestMapping(value = "view/activities", method = RequestMethod.GET)
+    public String viewActivities(Model m, HttpSession session) {
+        String username = (String) session.getAttribute("userEmail");
+        Long userId = userService.getUserIdByEmail(username);
+        List<Activity> activities = activityService.viewAllActivitiesByUserId(userId);
+        m.addAttribute("activities", activities);
+        return "viewActivities";
     }
 }

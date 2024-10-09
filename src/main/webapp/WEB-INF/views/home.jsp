@@ -204,7 +204,7 @@
             <input type="date" placeholder="Activity Date" />
             <button class="log-button">Log Activity</button>
         </div>
-        <button class="view-button" onclick="location.href='viewActivities.jsp'">View Activities</button>
+        <button class="view-button" onclick="location.href='http://localhost:8080/sustainify/api/view/activities'">View Activities</button>
     </div>
 
     <div class="box">

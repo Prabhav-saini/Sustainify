@@ -13,7 +13,6 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String type;
-    @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime dateLogged;
     @UpdateTimestamp

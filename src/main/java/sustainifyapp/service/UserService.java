@@ -48,4 +48,9 @@ public class UserService {
         return userDao.getUserByEmail(email);
     }
 
+    @Transactional
+    public Long getUserIdByEmail(String email) {
+        return userDao.getUserId(email);
+    }
+
 }
